@@ -1,5 +1,12 @@
 require "sinatra"
+require "sinatra/reloader"
+require "erubis"
+
+root = File.expand_path("..", __FILE__)
 
 get '/' do
-  "Hello There"
+  @files = Dir.glob(root + "/data/*").map do |path|
+    File.basename(path)
+  end
+  erb :index
 end
