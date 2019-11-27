@@ -1,1 +1,5 @@
-# This file will contain my application code. 
+require "sinatra"
+
+get '/' do
+  "Hello There"
+end
