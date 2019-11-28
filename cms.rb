@@ -7,7 +7,10 @@ root = File.expand_path("..", __FILE__)
 
 # set :public_folder, 'data' # for some reason this doesn't render format correctly
 
-
+configure do
+  enable :sessions
+  set :session_secret, 'set'
+end
 
 get '/' do
   @files = Dir.glob(root + "/data/*").map do |path|
@@ -28,7 +31,7 @@ get "/:filename" do
   if @files.include?(params[:filename])
     File.read(file_path)
   else
-    # session[:error] = "#{params[:filename]} does not exist."
+    session[:error] = "#{params[:filename]} does not exist."
     redirect "/"
   end
 end

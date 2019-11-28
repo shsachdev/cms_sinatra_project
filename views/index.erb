@@ -5,3 +5,7 @@
     </li>
   <% end %>
 </ul>
+
+<% if session[:error] %>
+    <p><%= session.delete(:error) %></p>
+<% end %>
