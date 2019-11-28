@@ -4,7 +4,7 @@ require "erubis"
 
 root = File.expand_path("..", __FILE__)
 
-set :public_folder, 'data'
+# set :public_folder, 'data' # for some reason this doesn't render format correctly
 
 get '/' do
   @files = Dir.glob(root + "/data/*").map do |path|
