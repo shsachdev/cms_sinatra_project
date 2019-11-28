@@ -2,8 +2,12 @@ require "sinatra"
 require "sinatra/reloader"
 require "erubis"
 require "pry"
+require "redcarpet"
 
 root = File.expand_path("..", __FILE__)
+
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+markdown.render(# This will be a headline!)
 
 # set :public_folder, 'data' # for some reason this doesn't render format correctly
 
@@ -29,7 +33,12 @@ get "/:filename" do
   headers["Content-Type"] = "text/plain"
 
   if @files.include?(params[:filename])
-    File.read(file_path)
+    if File.extname(params[:filename]) == ".md"
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+      markdown.render(File.read(file_path))
+    else
+      File.read(file_path)
+    end
   else
     session[:error] = "#{params[:filename]} does not exist."
     redirect "/"
