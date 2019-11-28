@@ -17,8 +17,17 @@ get '/' do
 end
 
 get "/:filename" do
+  @files = Dir.glob(root + "/data/*").map do |path|
+    File.basename(path)
+  end
+
   file_path = root + "/data/" + params[:filename]
 
   headers["Content-Type"] = "text/plain"
-  File.read(file_path)
+
+  if @files.include?(params[:filename])
+    File.read(file_path)
+  else
+    session[:error] = "#{params[:filename]} does not exist."
+  end
 end
