@@ -10,5 +10,3 @@ get '/' do
   end
   erb :index
 end
-
-get '/'
