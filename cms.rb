@@ -19,3 +19,6 @@ get "/:filename" do
   headers["Content-Type"] = "text/plain"
   File.read(file_path)
 end
+
+def error_for_file_name
+end
