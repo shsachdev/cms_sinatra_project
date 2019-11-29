@@ -18,7 +18,7 @@ end
 helpers do
   def render_markdown(txt)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    markdown.render(txt)
+    markdown.render("<h1>Ruby is...</h1>")   # File.read(txt)
   end
 end
 
