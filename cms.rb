@@ -52,8 +52,8 @@ end
 
 # saves the changes made to the document that is being edited
 post "/:filename/edit/save" do
-  params[:new_text] # shows that the new_text paramater is not the right parameter you want to pass through
+  params[:new_text]
 
-  session[:update] = "#{params[:filename]} has been updated."
-  redirect "/"
+  # session[:update] = "#{params[:filename]} has been updated."
+  # redirect "/"
 end

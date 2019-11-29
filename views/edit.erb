@@ -1,9 +1,10 @@
 <p> Edit Content of <%=params[:filename]%></p>
 
 
-<form method="POST" action="/<%=params[:filename]%>/edit/save" name="confirmationForm">
-  <textarea id="new_text" rows="4" cols="50" method="POST" name="new_text" form=confirmationForm action="/<%=params[:filename]%>/edit/save">
-    <%=File.read(@file_path)%>
-  </textarea>
+<textarea id="new_text" rows="4" cols="50" method="POST" name="new_text" form=confirmationForm action="/<%=params[:filename]%>/edit/save">
+  <%=File.read(@file_path)%>
+</textarea>
+
+<form method="POST" action="/<%=params[:filename]%>/edit/save" name="confirmationForm" id=confirmationForm>
   <input type="submit" value="Save Changes">
 </form>
