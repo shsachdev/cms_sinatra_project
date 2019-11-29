@@ -1,1 +1,5 @@
-Hi there!
+<p> Edit Content of <%=params[:filename]%></p>
+
+<textarea rows="4" cols="50">
+<%=File.read(@file_path)%>
+</textarea>

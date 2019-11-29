@@ -6,10 +6,6 @@ require "redcarpet"
 
 root = File.expand_path("..", __FILE__)
 
-
-
-# set :public_folder, 'data' # for some reason this doesn't render format correctly
-
 configure do
   enable :sessions
   set :session_secret, 'set'
@@ -50,5 +46,6 @@ get "/:filename" do
 end
 
 get "/:filename/edit" do
+  @file_path = root + "/data/" + params[:filename]
   erb :edit
 end
