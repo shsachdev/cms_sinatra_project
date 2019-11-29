@@ -49,3 +49,11 @@ get "/:filename/edit" do
   @file_path = root + "/data/" + params[:filename]
   erb :edit
 end
+
+# saves the changes made to the document that is being edited
+post "/:filename/edit/save" do
+  params[:new_text]
+
+  # session[:update] = "#{params[:filename]} has been updated."
+  # redirect "/"
+end

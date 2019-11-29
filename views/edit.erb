@@ -1,5 +1,8 @@
 <p> Edit Content of <%=params[:filename]%></p>
 
-<textarea rows="4" cols="50">
-<%=File.read(@file_path)%>
-</textarea>
+<form action = "/<%=params[:filename]%>/edit/save" method = "get">
+  <textarea rows="4" cols="50">
+  <%=File.read(@file_path)%>
+  </textarea>
+  <input name = "new_text" type = "submit" value = "Save Changes"</input>
+</form>
