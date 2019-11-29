@@ -5,6 +5,6 @@
   <%=File.read(@file_path)%>
 </textarea>
 
-<form method="POST" action="/<%=params[:filename]%>/edit/save" name="confirmationForm" id=confirmationForm>
+<form method="POST" action="/<%=params[:filename]%>" name="confirmationForm" id=confirmationForm>
   <input type="submit" value="Save Changes">
 </form>

@@ -51,10 +51,9 @@ get "/:filename/edit" do
 end
 
 # saves the changes made to the document that is being edited
-post "/:filename/edit/save" do
+post "/:filename" do
   file_path = root + "/data/" + params[:filename] # just the path to the current file
   file = File.open(file_path, "w")
-  # file.map {|line| ""}
   file.puts(params[:new_text]) # update the file with this new text
   file.close
   session[:update] = "#{params[:filename]} has been updated."
