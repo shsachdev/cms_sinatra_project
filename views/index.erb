@@ -1,11 +1,11 @@
 <ul>
   <% @files.each do |file| %>
     <li>
-      <a href="<%=file%>"><%= file %></a>
+      <a href="<%=file%>"><%= file %> <button type="button">Edit</button> </a>
     </li>
   <% end %>
 </ul>
 
-<% if session[:error] %>
-    <p><%= session.delete(:error) %></p>
+<% if session[:update] %>
+    <p><%= session.delete(:update) %></p>
 <% end %>

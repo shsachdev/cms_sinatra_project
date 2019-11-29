@@ -44,7 +44,11 @@ get "/:filename" do
       File.read(file_path)
     end
   else
-    session[:error] = "#{params[:filename]} does not exist."
+    session[:update] = "#{params[:filename]} does not exist."
     redirect "/"
   end
+end
+
+get "/:filename/edit" do
+  erb :edit
 end
