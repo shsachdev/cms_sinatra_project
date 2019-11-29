@@ -18,7 +18,7 @@ end
 helpers do
   def render_markdown(txt)
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    markdown.render("<h1>Ruby is...</h1>")   # File.read(txt)
+    markdown.render(File.read(txt))
   end
 end
 
@@ -36,12 +36,11 @@ get "/:filename" do
 
   file_path = root + "/data/" + params[:filename]
 
-  headers["Content-Type"] = "text/plain"
-
   if @files.include?(params[:filename])
     if File.extname(params[:filename]) == ".md"
        render_markdown(file_path)
     else
+      headers["Content-Type"] = "text/plain"
       File.read(file_path)
     end
   else
