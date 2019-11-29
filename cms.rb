@@ -52,8 +52,9 @@ end
 
 # saves the changes made to the document that is being edited
 post "/:filename/edit/save" do
-  params[:new_text]
-
-  # session[:update] = "#{params[:filename]} has been updated."
-  # redirect "/"
+  file_path = root + "/data/" + params[:filename] # just the path to the current file
+  
+  params[:new_text] # the updated text that the file should consist of
+  session[:update] = "#{params[:filename]} has been updated."
+  redirect "/"
 end
