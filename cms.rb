@@ -6,14 +6,20 @@ require "redcarpet"
 
 root = File.expand_path("..", __FILE__)
 
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-markdown.render(# This will be a headline!)
+
 
 # set :public_folder, 'data' # for some reason this doesn't render format correctly
 
 configure do
   enable :sessions
   set :session_secret, 'set'
+end
+
+helpers do
+  def render_markdown(txt)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    markdown.render(txt)
+  end
 end
 
 get '/' do
@@ -34,8 +40,7 @@ get "/:filename" do
 
   if @files.include?(params[:filename])
     if File.extname(params[:filename]) == ".md"
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-      markdown.render(File.read(file_path))
+       render_markdown(file_path)
     else
       File.read(file_path)
     end
