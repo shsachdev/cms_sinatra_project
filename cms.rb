@@ -35,6 +35,11 @@ get '/' do
   erb :index
 end
 
+get "/new" do
+  
+  erb :new_doc
+end
+
 get "/:filename" do
   pattern = File.join(data_path, "*")
   @files = Dir.glob(pattern).map do |path|
