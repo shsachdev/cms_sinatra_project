@@ -18,19 +18,30 @@ helpers do
   end
 end
 
+def data_path
+  if ENV["RACK_ENV"] == "test"
+    File.expand_path("../test/data", __FILE__)
+  else
+    File.expand_path("../data", __FILE__)
+  end
+end
+
+
 get '/' do
-  @files = Dir.glob(root + "/data/*").map do |path|
+  pattern = File.join(data_path, "*")
+  @files = Dir.glob(pattern).map do |path|
     File.basename(path)
   end
   erb :index
 end
 
 get "/:filename" do
-  @files = Dir.glob(root + "/data/*").map do |path|
+  pattern = File.join(data_path, "*")
+  @files = Dir.glob(pattern).map do |path|
     File.basename(path)
   end
 
-  file_path = root + "/data/" + params[:filename]
+  file_path = File.join(data_path, params[:filename])
 
   if @files.include?(params[:filename])
     if File.extname(params[:filename]) == ".md"
@@ -46,13 +57,13 @@ get "/:filename" do
 end
 
 get "/:filename/edit" do
-  @file_path = root + "/data/" + params[:filename]
+  @file_path = File.join(data_path, params[:filename])
   erb :edit
 end
 
 # saves the changes made to the document that is being edited
 post "/:filename" do
-  file_path = root + "/data/" + params[:filename] # just the path to the current file
+  file_path = File.join(data_path, params[:filename])
   File.write(file_path,params[:new_text])
   session[:update] = "#{params[:filename]} has been updated."
   redirect "/"
