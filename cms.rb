@@ -31,7 +31,7 @@ def data_path
   end
 end
 
-
+# Homepage
 get '/' do
   pattern = File.join(data_path, "*")
   @files = Dir.glob(pattern).map do |path|
