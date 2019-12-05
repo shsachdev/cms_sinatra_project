@@ -59,7 +59,7 @@ class CMSTest < Minitest::Test
 
     assert_equal 200, last_response.status
     assert_includes last_response.body, "<textarea"
-    assert_includes last_response.body, %q(<button type="submit")
+    assert_includes last_response.body, %q(<input type="submit")
   end
 
   def test_updating_document
