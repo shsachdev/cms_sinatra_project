@@ -44,6 +44,7 @@ get "/new" do
   erb :new_doc
 end
 
+# Create a new document
 post "/new" do
   if params[:new_doc_name].to_s.size == 0
     status 422
