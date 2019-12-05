@@ -36,8 +36,11 @@ get '/' do
 end
 
 get "/new" do
-  
   erb :new_doc
+end
+
+post "/new" do
+  params[:new_doc_name]
 end
 
 get "/:filename" do
