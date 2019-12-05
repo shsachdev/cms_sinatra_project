@@ -45,7 +45,7 @@ get "/:filename" do
 
   if @files.include?(params[:filename])
     if File.extname(params[:filename]) == ".md"
-       render_markdown(file_path)
+       erb render_markdown(file_path)
     else
       headers["Content-Type"] = "text/plain"
       File.read(file_path)
