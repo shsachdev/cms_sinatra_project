@@ -51,7 +51,7 @@ get "/:filename" do
       File.read(file_path)
     end
   else
-    session[:update] = "#{params[:filename]} does not exist."
+    session[:message] = "#{params[:filename]} does not exist."
     redirect "/"
   end
 end
@@ -65,6 +65,6 @@ end
 post "/:filename" do
   file_path = File.join(data_path, params[:filename])
   File.write(file_path,params[:new_text])
-  session[:update] = "#{params[:filename]} has been updated."
+  session[:message] = "#{params[:filename]} has been updated."
   redirect "/"
 end
