@@ -2,9 +2,8 @@ require "sinatra"
 require "sinatra/reloader"
 require "erubis"
 require "pry"
+require "fileutils"
 require "redcarpet"
-
-root = File.expand_path("..", __FILE__)
 
 configure do
   enable :sessions
@@ -39,8 +38,13 @@ get "/new" do
   erb :new_doc
 end
 
+# params[:new_doc_name] # I get the right file name using this
+
 post "/new" do
-  params[:new_doc_name]
+  if params["new_doc_name"] == ""
+    session[:message] = "A name is required!"
+    erb :new_doc
+  end
 end
 
 get "/:filename" do
