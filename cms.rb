@@ -15,6 +15,12 @@ helpers do
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     markdown.render(File.read(txt))
   end
+
+  def create_document(name, content = "")
+    File.open(File.join(data_path, name), "w") do |file|
+      file.write(content)
+    end
+  end
 end
 
 def data_path
@@ -41,9 +47,14 @@ end
 # params[:new_doc_name] # I get the right file name using this
 
 post "/new" do
-  if params["new_doc_name"] == ""
-    session[:message] = "A name is required!"
+  if params[:new_doc_name].to_s.size == 0
+    status 422
+    session[:message] = "A name is required"
     erb :new_doc
+  else
+    create_document(params[:new_doc_name])
+    session[:message] = "#{params[:new_doc_name]} has been created."
+    redirect "/"
   end
 end
 
