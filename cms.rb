@@ -44,8 +44,6 @@ get "/new" do
   erb :new_doc
 end
 
-# params[:new_doc_name] # I get the right file name using this
-
 post "/new" do
   if params[:new_doc_name].to_s.size == 0
     status 422
@@ -89,5 +87,13 @@ post "/:filename" do
   file_path = File.join(data_path, params[:filename])
   File.write(file_path,params[:new_text])
   session[:message] = "#{params[:filename]} has been updated."
+  redirect "/"
+end
+
+# Delete a file
+post "/:filename/destroy" do
+  @file_path = File.join(data_path, params[:filename])
+  File.delete(@file_path)
+  session[:message] = "#{params[:filename]} has been deleted."
   redirect "/"
 end
