@@ -57,6 +57,13 @@ post "/users/signin" do
   end
 end
 
+post "/users/signout" do
+  session[:username] == false
+  session[:password] == false
+  session[:message] = "You have been successfully signed out!"
+  redirect "/"
+end
+
 get "/new" do
   erb :new_doc
 end

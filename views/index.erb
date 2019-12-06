@@ -14,7 +14,10 @@
 
 <p>
   <% if session[:username] && session[:password]%>
-    <button type="submit">Sign Out</button>
+      <%binding.pry%>
+      <form method="POST" action="/users/signout">
+        <input type="submit" value="Sign Out" />
+      </form>
   <% else %>
     <form action="/users/signin">
       <input type="submit" value="Sign In" />
