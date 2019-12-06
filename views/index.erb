@@ -14,7 +14,7 @@
 
 <p>
   <% if session[:username] && session[:password]%>
-      <%binding.pry%>
+      <p> Signed in as admin </p>
       <form method="POST" action="/users/signout">
         <input type="submit" value="Sign Out" />
       </form>

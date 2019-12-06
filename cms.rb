@@ -52,15 +52,15 @@ post "/users/signin" do
     session[:message] = "Welcome"
     redirect "/"
   else
-    session[:message] = "Error"
-    redirect "/users/signin"
+    status 422
+    session[:message] = "Invalid credentials"
   end
 end
 
 post "/users/signout" do
-  session[:username] == false
-  session[:password] == false
-  session[:message] = "You have been successfully signed out!"
+  session[:username] = false
+  session[:password] = false
+  session[:message] = "You have been signed out!"
   redirect "/"
 end
 
