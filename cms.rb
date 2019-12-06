@@ -72,7 +72,7 @@ get "/new" do
   if is_signed_in?
     erb :new_doc
   else
-    session[:message] = "You must be signed in to do that"
+    session[:message] = "You must be signed in to do that."
     redirect "/"
   end
 end
@@ -90,7 +90,7 @@ post "/new" do
       redirect "/"
     end
   else
-    session[:message] = "You must be signed in to do that"
+    session[:message] = "You must be signed in to do that."
     redirect "/"
   end
 end
@@ -121,7 +121,7 @@ get "/:filename/edit" do
     @file_path = File.join(data_path, params[:filename])
     erb :edit
   else
-    session[:message] = "You must be signed in to do that"
+    session[:message] = "You must be signed in to do that."
     redirect "/"
   end
 end
@@ -134,7 +134,7 @@ post "/:filename" do
     session[:message] = "#{params[:filename]} has been updated."
     redirect "/"
   else
-    session[:message] = "You must be signed in to do that"
+    session[:message] = "You must be signed in to do that."
     redirect "/"
   end
 end
@@ -147,7 +147,7 @@ post "/:filename/destroy" do
     session[:message] = "#{params[:filename]} has been deleted."
     redirect "/"
   else
-    session[:message] = "You must be signed in to do that"
+    session[:message] = "You must be signed in to do that."
     redirect "/"
   end
 end
