@@ -21,6 +21,10 @@ helpers do
       file.write(content)
     end
   end
+
+  def is_signed_in?
+    session[:username] == "admin"
+  end
 end
 
 def data_path
@@ -47,8 +51,8 @@ end
 
 post "/users/signin" do
   if params[:username] == "admin" && params[:password] == "secret"
-    session[:username] = true
-    session[:password] = true
+    session[:username] = "admin"
+    session[:password] = "secret"
     session[:message] = "Welcome"
     redirect "/"
   else
@@ -103,8 +107,13 @@ get "/:filename" do
 end
 
 get "/:filename/edit" do
-  @file_path = File.join(data_path, params[:filename])
-  erb :edit
+  if is_signed_in?
+    @file_path = File.join(data_path, params[:filename])
+    erb :edit
+  else
+    session[:message] = "You must be signed in to do that"
+    redirect "/"
+  end
 end
 
 # saves the changes made to the document that is being edited
