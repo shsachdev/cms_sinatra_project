@@ -40,6 +40,10 @@ get '/' do
   erb :index
 end
 
+# Sign in Page
+get "/users/login" do
+end
+
 get "/new" do
   erb :new_doc
 end
