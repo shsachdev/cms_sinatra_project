@@ -42,6 +42,11 @@ end
 
 # Sign in Page
 get "/users/login" do
+  erb :sign_in
+end
+
+post "/users/signin" do
+  
 end
 
 get "/new" do
