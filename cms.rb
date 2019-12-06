@@ -4,6 +4,7 @@ require "erubis"
 require "pry"
 require "fileutils"
 require "redcarpet"
+require "yaml"
 
 configure do
   enable :sessions
