@@ -69,18 +69,28 @@ post "/users/signout" do
 end
 
 get "/new" do
-  erb :new_doc
+  if is_signed_in?
+    erb :new_doc
+  else
+    session[:message] = "You must be signed in to do that"
+    redirect "/"
+  end
 end
 
 # Create a new document
 post "/new" do
-  if params[:new_doc_name].to_s.size == 0
-    status 422
-    session[:message] = "A name is required"
-    erb :new_doc
+  if is_signed_in?
+    if params[:new_doc_name].to_s.size == 0
+      status 422
+      session[:message] = "A name is required"
+      erb :new_doc
+    else
+      create_document(params[:new_doc_name])
+      session[:message] = "#{params[:new_doc_name]} has been created."
+      redirect "/"
+    end
   else
-    create_document(params[:new_doc_name])
-    session[:message] = "#{params[:new_doc_name]} has been created."
+    session[:message] = "You must be signed in to do that"
     redirect "/"
   end
 end
@@ -118,16 +128,26 @@ end
 
 # saves the changes made to the document that is being edited
 post "/:filename" do
-  file_path = File.join(data_path, params[:filename])
-  File.write(file_path,params[:new_text])
-  session[:message] = "#{params[:filename]} has been updated."
-  redirect "/"
+  if is_signed_in?
+    file_path = File.join(data_path, params[:filename])
+    File.write(file_path,params[:new_text])
+    session[:message] = "#{params[:filename]} has been updated."
+    redirect "/"
+  else
+    session[:message] = "You must be signed in to do that"
+    redirect "/"
+  end
 end
 
 # Delete a file
 post "/:filename/destroy" do
-  @file_path = File.join(data_path, params[:filename])
-  File.delete(@file_path)
-  session[:message] = "#{params[:filename]} has been deleted."
-  redirect "/"
+  if is_signed_in?
+    @file_path = File.join(data_path, params[:filename])
+    File.delete(@file_path)
+    session[:message] = "#{params[:filename]} has been deleted."
+    redirect "/"
+  else
+    session[:message] = "You must be signed in to do that"
+    redirect "/"
+  end
 end
