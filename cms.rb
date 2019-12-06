@@ -47,10 +47,9 @@ end
 
 post "/users/signin" do
   if params[:username] == "admin" && params[:password] == "secret"
-    session[:username] == true
-    session[:password] == true
+    session[:username] = true
+    session[:password] = true
     session[:message] = "Welcome"
-    binding.pry
     redirect "/"
   else
     session[:message] = "Error"
