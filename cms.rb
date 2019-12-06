@@ -50,6 +50,7 @@ post "/users/signin" do
     session[:username] == true
     session[:password] == true
     session[:message] = "Welcome"
+    binding.pry
     redirect "/"
   else
     session[:message] = "Error"
