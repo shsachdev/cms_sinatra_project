@@ -26,6 +26,15 @@ helpers do
   def is_signed_in?
     session[:username] != nil
   end
+
+  def load_user_credentials
+    credentials_path = if ENV["RACK_ENV"] == "test"
+      File.expand_path("../test/users.yml", __FILE__)
+    else
+      File.expand_path("../users.yml", __FILE__)
+    end
+    YAML.load_file(credentials_path)
+  end
 end
 
 def data_path
@@ -51,7 +60,7 @@ get "/users/signin" do
 end
 
 post "/users/signin" do
-  user_file = YAML.load_file('users.yml')
+  user_file = load_user_credentials
   if user_file.keys.include?(params[:username]) && user_file[params[:username]] == params[:password]
     session[:username] = params[:username]
     session[:password] = params[:password]
