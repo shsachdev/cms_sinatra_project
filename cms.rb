@@ -41,12 +41,20 @@ get '/' do
 end
 
 # Sign in Page
-get "/users/login" do
+get "/users/signin" do
   erb :sign_in
 end
 
 post "/users/signin" do
-  
+  if params[:username] == "admin" && params[:password] == "secret"
+    session[:username] == true
+    session[:password] == true
+    session[:message] = "Welcome"
+    redirect "/"
+  else
+    session[:message] = "Error"
+    redirect "/users/signin"
+  end
 end
 
 get "/new" do
