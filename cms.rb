@@ -24,7 +24,7 @@ helpers do
   end
 
   def is_signed_in?
-    session[:username] == "admin"
+    session[:username] != nil
   end
 end
 
@@ -51,9 +51,10 @@ get "/users/signin" do
 end
 
 post "/users/signin" do
-  if params[:username] == "admin" && params[:password] == "secret"
-    session[:username] = "admin"
-    session[:password] = "secret"
+  user_file = YAML.load_file('users.yml')
+  if user_file.keys.include?(params[:username]) && user_file[params[:username]] == params[:password]
+    session[:username] = params[:username]
+    session[:password] = params[:password]
     session[:message] = "Welcome"
     redirect "/"
   else
@@ -63,8 +64,8 @@ post "/users/signin" do
 end
 
 post "/users/signout" do
-  session[:username] = false
-  session[:password] = false
+  session[:username] = nil
+  session[:password] = nil
   session[:message] = "You have been signed out!"
   redirect "/"
 end
