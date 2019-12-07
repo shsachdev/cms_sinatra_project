@@ -5,6 +5,7 @@ require "pry"
 require "fileutils"
 require "redcarpet"
 require "yaml"
+require "bcrypt"
 
 configure do
   enable :sessions
