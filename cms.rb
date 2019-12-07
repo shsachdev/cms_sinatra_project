@@ -60,9 +60,10 @@ get "/users/signin" do
   erb :sign_in
 end
 
+
 post "/users/signin" do
   user_file = load_user_credentials
-  if user_file.keys.include?(params[:username]) && user_file[params[:username]] == params[:password]
+  if user_file.keys.include?(params[:username]) && BCrypt::Password.new(user_file[params[:username]]) == params[:password]
     session[:username] = params[:username]
     session[:password] = params[:password]
     session[:message] = "Welcome"
