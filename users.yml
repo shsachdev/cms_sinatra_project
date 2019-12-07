@@ -1,7 +1,7 @@
 {
-  anish: toomanymen,
-  bob: scientist,
-  shikhar: victorious,
-  ajay: portland,
-  chris: wework
+  anish: "$2a$12$5WYv6R3k/8SsetMUwMgDzOkHJNfJiz41p1LjzVVW075wbyaXFaFCq",
+  bob: "$2a$12$AkiHbrnSlRyXe94.KGcHAuv4fI4uxwy7CLlDvpbhBbBS0liHTy1fq",
+  shikhar: "$2a$12$rhA3NZ2I6IzI7VHA39ZHo.goVjDGbsLxJZkBS7.mfEt5OkLksvAAi",
+  ajay: "$2a$12$n.nNSJamuCa6ucuDN/ktAei5enirA9fTweitXDxrHfsPTjNLQ3G5G",
+  chris: "$2a$12$R5BzHXfjzb6kbffZM4n.sOX0aTMnBQ48f5HL5ARWigQ4Mx6xeJ7Ja"
 }
